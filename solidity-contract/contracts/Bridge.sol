@@ -14,7 +14,7 @@ import "./interfaces/IERCHandler.sol";
     @title Facilitates deposits, creation and votiing of deposit proposals, and deposit executions.
     @author ChainSafe Systems.
  */
-contract Bridge is Pausable, AccessControl, SafeMath {
+contract Bridge is CustomPausable, AccessControl, CustomSafeMath {
 
     uint8   public _chainID;
     uint256 public _relayerThreshold;

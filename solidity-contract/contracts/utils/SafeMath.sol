@@ -10,7 +10,7 @@ pragma solidity 0.7.0;
  * https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol
  */
 
-contract SafeMath {
+contract CustomSafeMath {
 
     /**
      * @dev Returns the subtraction of two unsigned integers, reverting on

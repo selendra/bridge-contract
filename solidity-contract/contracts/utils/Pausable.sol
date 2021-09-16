@@ -10,7 +10,7 @@ pragma solidity 0.7.0;
  * https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/EnumerableSet.sol
  *
  */
-contract Pausable {
+contract CustomPausable {
     /**
      * @dev Emitted when the pause is triggered by `account`.
      */

@@ -1,5 +1,5 @@
 .idea/
-/build
+build
 .history/
 node_modules/
 gethdata/
