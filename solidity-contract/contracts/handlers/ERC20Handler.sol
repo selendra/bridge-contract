@@ -6,7 +6,6 @@ pragma experimental ABIEncoderV2;
 import "../interfaces/IDepositExecute.sol";
 import "./HandlerHelpers.sol";
 import "../ERC20Safe.sol";
-import "@openzeppelin/contracts/presets/ERC20PresetMinterPauser.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 
 /**
