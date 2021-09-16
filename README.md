@@ -1,2 +1,2 @@
-# bridge-contract
-selendra bridge contract
+# bridge-cli
+selendra bridge cli
