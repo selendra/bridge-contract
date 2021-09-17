@@ -4,7 +4,6 @@ pragma solidity 0.7.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 import "./ERC20Selendra.sol";
 
 /**
@@ -68,8 +67,8 @@ contract ERC20Safe {
         @param amount Amount of tokens to burn.
      */
     function burnERC20(address tokenAddress, address owner, uint256 amount) internal {
-        ERC20Burnable erc20 = ERC20Burnable(tokenAddress);
-        erc20.burnFrom(owner, amount);
+        SELToken erc20 = SELToken(tokenAddress);
+        erc20.burn(owner, amount);
     }
 
     /**
