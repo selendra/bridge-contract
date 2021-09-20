@@ -2,9 +2,9 @@
 
 pragma solidity >=0.6.0 <0.8.0;
 
+import "./ERC20PresetMinterPauser.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "./ERC20PresetMinterPauser";
 import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 
 /**

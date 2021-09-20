@@ -9,7 +9,7 @@ const CONTRACT_PATH = "./solidity-contract/build/contracts"
 const ContractABIs = {
     Bridge: require(CONTRACT_PATH + "/Bridge.json"),
     Erc20Handler: require(CONTRACT_PATH + "/ERC20Handler.json"),
-    Erc20Mintable: require(CONTRACT_PATH + "/SELToken.json"),
+    Erc20Mintable: require(CONTRACT_PATH + "/ERC20PresetMinterPauser.json"),
     HandlerHelpers: require(CONTRACT_PATH + "/HandlerHelpers.json")
 }
  
