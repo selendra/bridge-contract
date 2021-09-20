@@ -1,0 +1,39 @@
+bridge-cli deploy --all --relayerThreshold 1
+
+bridge-cli bridge register-resource \
+--bridge "0x66837266BB74e7221223088A6f48a3720803F8b3" \
+--handler "0xb53516745E6c20aE1e7552b44e04A4060E09B182" \
+--resourceId "0x0000000000000000000000421a2Dcf505A39126CaA80908dbFb2aD50F5cD942a" \
+--targetContract "0x421a2Dcf505A39126CaA80908dbFb2aD50F5cD94"
+
+bridge-cli bridge set-burn \
+--bridge "0x66837266BB74e7221223088A6f48a3720803F8b3" \
+--handler "0xb53516745E6c20aE1e7552b44e04A4060E09B182" \
+--tokenContract "0x421a2Dcf505A39126CaA80908dbFb2aD50F5cD94"
+
+bridge-cli erc20 add-minter \
+--erc20Address "0x421a2Dcf505A39126CaA80908dbFb2aD50F5cD94" \
+--minter "0xb53516745E6c20aE1e7552b44e04A4060E09B182"
+
+bridge-cli erc20 balance \
+--erc20Address "0x421a2Dcf505A39126CaA80908dbFb2aD50F5cD94" \
+--address "0xb53516745E6c20aE1e7552b44e04A4060E09B182"
+
+bridge-cli erc20 approve \
+--erc20Address "0x421a2Dcf505A39126CaA80908dbFb2aD50F5cD94" \
+--recipient "0xb53516745E6c20aE1e7552b44e04A4060E09B182" \
+--amount 1000000000000000000000
+
+bridge-cli erc20 deposit --bridge "0x66837266BB74e7221223088A6f48a3720803F8b3" --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d" --amount 30000000000000000000 --dest 1 --resourceId "0x0000000000000000000000421a2Dcf505A39126CaA80908dbFb2aD50F5cD942a"
+
+Method: 0x4272696467655472616E736665722E7472616E73666572 (BridgeTransfer.transfer)
+
+================================================================
+Bridge:             0x66837266BB74e7221223088A6f48a3720803F8b3
+----------------------------------------------------------------
+Erc20 Handler:      0xb53516745E6c20aE1e7552b44e04A4060E09B182
+----------------------------------------------------------------
+Erc20:              0x421a2Dcf505A39126CaA80908dbFb2aD50F5cD94
+----------------------------------------------------------------
+ERC20 RESOURCEID:   0x0000000000000000000000421a2Dcf505A39126CaA80908dbFb2aD50F5cD942a
+================================================================

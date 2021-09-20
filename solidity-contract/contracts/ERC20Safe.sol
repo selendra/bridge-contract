@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.7.0;
+pragma solidity >=0.6.0 <0.8.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "./ERC20Selendra.sol";
+import "./ERC20PresetMinterPauser";
+import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 
 /**
     @title Manages deposited ERC20s.
@@ -55,7 +56,7 @@ contract ERC20Safe {
         @param amount Amount of token to mint.
      */
     function mintERC20(address tokenAddress, address recipient, uint256 amount) internal {
-        SELToken erc20 = SELToken(tokenAddress);
+        ERC20PresetMinterPauser erc20 = ERC20PresetMinterPauser(tokenAddress);
         erc20.mint(recipient, amount);
 
     }
@@ -67,8 +68,8 @@ contract ERC20Safe {
         @param amount Amount of tokens to burn.
      */
     function burnERC20(address tokenAddress, address owner, uint256 amount) internal {
-        SELToken erc20 = SELToken(tokenAddress);
-        erc20.burn(owner, amount);
+        ERC20Burnable erc20 = ERC20Burnable(tokenAddress);
+        erc20.burnFrom(owner, amount);
     }
 
     /**
