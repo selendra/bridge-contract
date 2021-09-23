@@ -5,7 +5,7 @@ install-deps:
 	./scripts/install_deps.sh
 
 install-cli: compile
-	@echo " > \033[32mInstalling cb-sol-cli... \033[0m "
+	@echo " > \033[32mInstalling bridge-cli... \033[0m "
 	npm link ./cli 
 
 .PHONY: test
