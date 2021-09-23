@@ -84,3 +84,6 @@ bridge-cli erc20 deposit \
 --dest 1 \
 --resourceId "0x000000000000000000000079BF20B3F3b70A68E2aAE59603467fE0A6F242Ee2a"
 ```
+
+## License
+Selendra-cli is implement from [Chainbridge](https://github.com/ChainSafe/chainbridge-deploy).
