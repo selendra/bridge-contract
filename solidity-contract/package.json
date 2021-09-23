@@ -23,6 +23,7 @@
     "@openzeppelin/contracts": "=3.4.1",
     "commander": "^4.0.1",
     "rimraf": "^3.0.2",
+    "solc": "^0.4.26",
     "truffle": "^5.1.15"
   }
 }
