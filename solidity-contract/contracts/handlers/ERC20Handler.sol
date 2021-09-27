@@ -193,4 +193,5 @@ contract ERC20Handler is IDepositExecute, HandlerHelpers, ERC20Safe {
     function withdraw(address tokenAddress, address recipient, uint amount) external override onlyBridge {
         releaseERC20(tokenAddress, recipient, amount);
     }
+
 }

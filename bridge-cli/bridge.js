@@ -21,30 +21,6 @@ const registerResourceCmd = new Command("register-resource")
         await waitForTx(args.provider, tx.hash)
     })
 
-const registerGenericResourceCmd = new Command("register-generic-resource")
-    .description("Register a resource ID with a generic handler")
-    .option('--bridge <address>', 'Bridge contract address', constants.BRIDGE_ADDRESS)
-    .option('--handler <address>', 'Handler contract address', constants.GENERIC_HANDLER_ADDRESS)
-    .option('--targetContract <address>', `Contract address to be registered`, constants.CENTRIFUGE_ASSET_STORE_ADDRESS)
-    .option('--resourceId <address>', `ResourceID to be registered`, constants.GENERIC_RESOURCEID)
-    .option('--deposit <string>', "Deposit function signature", EMPTY_SIG)
-    .option('--execute <string>', "Execute proposal function signature", EMPTY_SIG)
-    .option('--hash', "Treat signature inputs as function prototype strings, hash and take the first 4 bytes", false)
-    .action(async function(args) {
-        await setupParentArgs(args, args.parent.parent)
-
-        const bridgeInstance = new ethers.Contract(args.bridge, constants.ContractABIs.Bridge.abi, args.wallet);
-
-        if (args.hash) {
-            args.deposit = getFunctionBytes(args.deposit)
-            args.execute = getFunctionBytes(args.execute)
-        }
-
-        log(args,`Registering generic resource ID ${args.resourceId} with contract ${args.targetContract} on handler ${args.handler}`)
-        const tx = await bridgeInstance.adminSetGenericResource(args.handler, args.resourceId, args.targetContract, args.deposit, args.execute, { gasPrice: args.gasPrice, gasLimit: args.gasLimit})
-        await waitForTx(args.provider, tx.hash)
-    })
-
 const setBurnCmd = new Command("set-burn")
     .description("Set a token contract as burnable in a handler")
     .option('--bridge <address>', 'Bridge contract address', constants.BRIDGE_ADDRESS)
@@ -104,7 +80,6 @@ const queryResourceId = new Command("query-resource")
 const bridgeCmd = new Command("bridge")
 
 bridgeCmd.addCommand(registerResourceCmd)
-bridgeCmd.addCommand(registerGenericResourceCmd)
 bridgeCmd.addCommand(setBurnCmd)
 bridgeCmd.addCommand(cancelProposalCmd)
 bridgeCmd.addCommand(queryProposalCmd)

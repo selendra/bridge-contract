@@ -13,12 +13,12 @@ const {
 const constants = require('./constants');
 
 
-program.option('--url <value>', 'URL to connect to', "https://kovan.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");
+program.option('--url <value>', 'URL to connect to', constants.DEFAULT_URL);
 program.option('--privateKey <value>', 'Private key to use', constants.deployerPrivKey);
 program.option('--jsonWallet <path>', '(Optional) Encrypted JSON wallet');
 program.option('--jsonWalletPassword <value>', '(Optional) Password for encrypted JSON wallet');
-program.option('--gasLimit <value>', "Gas limit for transactions", "8000000")
-program.option('--gasPrice <value>', "Gas limit for transactions", "3000000000")
+program.option('--gasLimit <value>', "Gas limit for transactions", constants.GASLIMIT)
+program.option('--gasPrice <value>', "Gas limit for transactions", constants.GASPRICE)
 
 program.addCommand(deploy)
 program.addCommand(bridge)
