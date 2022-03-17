@@ -40,5 +40,4 @@ contract CustomSafeMath {
 
         return c;
     }
-
 }

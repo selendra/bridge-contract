@@ -6,6 +6,7 @@
  const Ethers = require('ethers');
 
  const blankFunctionSig = '0x00000000';
+ const blankFunctionDepositerOffset = 0;
  const AbiCoder = new Ethers.utils.AbiCoder;
 
  const toHex = (covertThis, padding) => {
@@ -20,11 +21,47 @@
     return contractInstance.abi.filter(abiProperty => abiProperty.name === functionName)[0].signature;
  };
 
+ const createCallData = (contractInstance, functionName, valueTypes, values) => {
+    let signature = getFunctionSignature(contractInstance, functionName);
+    let encodedABI = abiEncode(valueTypes, values);
+    return signature + encodedABI.substr(2);
+ };
+
  const createERCDepositData = (tokenAmountOrID, lenRecipientAddress, recipientAddress) => {
     return '0x' +
         toHex(tokenAmountOrID, 32).substr(2) +      // Token amount or ID to deposit (32 bytes)
         toHex(lenRecipientAddress, 32).substr(2) + // len(recipientAddress)          (32 bytes)
         recipientAddress.substr(2);               // recipientAddress               (?? bytes)
+};
+
+const createERCWithdrawData = (tokenAddress, recipientAddress, tokenAmountOrID) => {
+    return '0x' +
+        toHex(tokenAddress, 32).substr(2) +
+        toHex(recipientAddress, 32).substr(2) +
+        toHex(tokenAmountOrID, 32).substr(2);
+}
+
+const createERC1155DepositData = (tokenIDs, amounts) => {
+    return abiEncode(["uint[]", "uint[]"], [tokenIDs, amounts]);
+}
+
+const createERC1155DepositProposalData = (tokenIDs, amounts, recipient, transferData) => {
+    return abiEncode(["uint[]", "uint[]", "bytes", "bytes"], [tokenIDs, amounts, recipient, transferData])
+}
+
+const createERC1155WithdrawData = (tokenAddress, recipient, tokenIDs, amounts, transferData) => {
+    return abiEncode(["address", "address", "uint[]", "uint[]", "bytes"], [tokenAddress, recipient, tokenIDs, amounts, transferData])
+}
+
+const createERC721DepositProposalData = (
+    tokenAmountOrID, lenRecipientAddress,
+    recipientAddress, lenMetaData, metaData) => {
+    return '0x' +
+        toHex(tokenAmountOrID, 32).substr(2) +     // Token amount or ID to deposit (32 bytes)
+        toHex(lenRecipientAddress, 32).substr(2) + // len(recipientAddress)         (32 bytes)
+        recipientAddress.substr(2) +               // recipientAddress              (?? bytes)
+        toHex(lenMetaData, 32).substr(2) +         // len(metaData)                 (32 bytes)
+        toHex(metaData, lenMetaData).substr(2)     // metaData                      (?? bytes)
 };
 
 const advanceBlock = () => {
@@ -33,8 +70,19 @@ const advanceBlock = () => {
     return provider.send("evm_mine", [time]);
 }
 
-const createResourceID = (contractAddress, chainID) => {
-    return toHex(contractAddress + toHex(chainID, 0).substr(2), 32)
+const createGenericDepositData = (hexMetaData) => {
+    if (hexMetaData === null) {
+        return '0x' +
+            toHex(0, 32).substr(2) // len(metaData) (32 bytes)
+    } 
+    const hexMetaDataLength = (hexMetaData.substr(2)).length / 2;
+    return '0x' +
+        toHex(hexMetaDataLength, 32).substr(2) +
+        hexMetaData.substr(2)
+};
+
+const createResourceID = (contractAddress, domainID) => {
+    return toHex(contractAddress + toHex(domainID, 1).substr(2), 32)
 };
 
 const assertObjectsMatch = (expectedObj, actualObj) => {
@@ -69,7 +117,7 @@ const assertObjectsMatch = (expectedObj, actualObj) => {
         assert.deepEqual(expectedValue, actualValue, `expectedValue: ${expectedValue} does not match actualValue: ${actualValue}`);    
     }
 };
-//uint72 nonceAndID = (uint72(depositNonce) << 8) | uint72(chainID);
+//uint72 nonceAndID = (uint72(depositNonce) << 8) | uint72(domainID);
 const nonceAndId = (nonce, id) => {
     return Ethers.utils.hexZeroPad(Ethers.utils.hexlify(nonce), 8) + Ethers.utils.hexZeroPad(Ethers.utils.hexlify(id), 1).substr(2)
 }
@@ -77,10 +125,18 @@ const nonceAndId = (nonce, id) => {
 module.exports = {
     advanceBlock,
     blankFunctionSig,
+    blankFunctionDepositerOffset,
     toHex,
     abiEncode,
     getFunctionSignature,
+    createCallData,
     createERCDepositData,
+    createERCWithdrawData,
+    createERC1155DepositData,
+    createERC1155DepositProposalData,
+    createERC1155WithdrawData,
+    createGenericDepositData,
+    createERC721DepositProposalData,
     createResourceID,
     assertObjectsMatch,
     nonceAndId

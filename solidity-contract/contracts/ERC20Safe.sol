@@ -2,9 +2,9 @@
 
 pragma solidity >=0.6.0 <0.8.0;
 
-import "./SELToken.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/presets/ERC20PresetMinterPauser.sol";
 
 /**
     @title Manages deposited ERC20s.
@@ -13,17 +13,6 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
  */
 contract ERC20Safe {
     using SafeMath for uint256;
-
-    /**
-        @notice Used to transfer tokens into the safe to fund proposals.
-        @param tokenAddress Address of ERC20 to transfer.
-        @param owner Address of current token owner.
-        @param amount Amount of tokens to transfer.
-     */
-    function fundERC20(address tokenAddress, address owner, uint256 amount) public {
-        IERC20 erc20 = IERC20(tokenAddress);
-        _safeTransferFrom(erc20, owner, address(this), amount);
-    }
 
     /**
         @notice Used to gain custody of deposited token.
@@ -55,8 +44,9 @@ contract ERC20Safe {
         @param amount Amount of token to mint.
      */
     function mintERC20(address tokenAddress, address recipient, uint256 amount) internal {
-        SELToken erc20 = SELToken(tokenAddress);
+        ERC20PresetMinterPauser erc20 = ERC20PresetMinterPauser(tokenAddress);
         erc20.mint(recipient, amount);
+
     }
 
     /**
@@ -66,8 +56,8 @@ contract ERC20Safe {
         @param amount Amount of tokens to burn.
      */
     function burnERC20(address tokenAddress, address owner, uint256 amount) internal {
-        SELToken erc20 = SELToken(tokenAddress);
-        erc20.burn(owner, amount);
+        ERC20Burnable erc20 = ERC20Burnable(tokenAddress);
+        erc20.burnFrom(owner, amount);
     }
 
     /**
@@ -97,7 +87,13 @@ contract ERC20Safe {
         @param token Token instance call targets
         @param data encoded call data
      */
-    function _safeCall(IERC20 token, bytes memory data) private {        
+    function _safeCall(IERC20 token, bytes memory data) private {
+        uint256 tokenSize;
+        assembly {
+            tokenSize := extcodesize(token)
+        }         
+        require(tokenSize > 0, "ERC20: not a contract");
+
         (bool success, bytes memory returndata) = address(token).call(data);
         require(success, "ERC20: call failed");
 

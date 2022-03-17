@@ -20,6 +20,8 @@
     "bridge-cli": "./index.js"
   },
   "dependencies": {
+    "@polkadot/util": "^8.4.1",
+    "@polkadot/util-crypto": "^8.4.1",
     "commander": "^5.0.0",
     "ethers": "^4.0.46"
   }

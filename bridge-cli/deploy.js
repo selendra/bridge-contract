@@ -86,7 +86,6 @@ async function deployBridgeContract(args) {
         args.relayerThreshold,
         ethers.utils.parseEther(args.fee.toString()),
         args.expiry,
-        { gasPrice: args.gasPrice, gasLimit: args.gasLimit}
 
     );
     await contract.deployed();
@@ -96,7 +95,7 @@ async function deployBridgeContract(args) {
 
 async function deployERC20(args) {
     const factory = new ethers.ContractFactory(constants.ContractABIs.Erc20Mintable.abi, constants.ContractABIs.Erc20Mintable.bytecode, args.wallet);
-    const contract = await factory.deploy({ gasPrice: args.gasPrice, gasLimit: args.gasLimit});
+    const contract = await factory.deploy("Wrap Selendra", "WSEL");
     await contract.deployed();
     args.erc20Contract = contract.address
     console.log("✓ ERC20 contract deployed")
@@ -104,7 +103,7 @@ async function deployERC20(args) {
 
 async function deployERC20Handler(args) {
     const factory = new ethers.ContractFactory(constants.ContractABIs.Erc20Handler.abi, constants.ContractABIs.Erc20Handler.bytecode, args.wallet);
-    const contract = await factory.deploy(args.bridgeContract, [], [], [], { gasLimit: args.gasLimit});
+    const contract = await factory.deploy(args.bridgeContract, [], [], []);
     await contract.deployed();
     args.erc20HandlerContract = contract.address
     console.log("✓ ERC20Handler contract deployed")
