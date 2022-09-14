@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-3.0-only
-pragma solidity >=0.6.0 <0.8.0;
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/presets/ERC20PresetMinterPauser.sol";
+import "@openzeppelin/contracts/token/ERC20/presets//ERC20PresetMinterPauser.sol";
 
 
 contract ERC20Custom is ERC20PresetMinterPauser {
