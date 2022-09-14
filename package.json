@@ -4,7 +4,8 @@
   "description": "Basic ethereum interactions for selendra-bridge",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bridge-cli": "./index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,6 @@
     "@polkadot/util": "^8.4.1",
     "@polkadot/util-crypto": "^8.4.1",
     "commander": "^5.0.0",
-    "ethers": "^4.0.46"
+    "ethers": "^5.7.1"
   }
 }

@@ -32,8 +32,8 @@ module.exports.ERC20_HANDLER_ADDRESS = "0x3167776db165D8eA0f51790CA2bbf44Db5105A
 module.exports.ERC20_ADDRESS = "0x3f709398808af36ADBA86ACC617FeB7F5B7B193E";
 
 module.exports.DEFAULT_SOURCE_ID = 4;
-module.exports.DEFAULT_DEST_ID = 2;
-module.exports.DEFAULT_URL = "https://rinkeby.infura.io/v3/330b5a1f4348415cb7701a576b525bcf"
+module.exports.DEFAULT_DEST_ID = 1;
+module.exports.DEFAULT_URL = "https://ropsten.infura.io/v3/78324f11f469479a9647bd6a75567001"
 module.exports.GASLIMIT = 2000000;
 module.exports.GASPRICE = 10000000000;
 

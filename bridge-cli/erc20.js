@@ -1,5 +1,6 @@
 const ethers = require('ethers');
 const constants = require('../constants');
+const { BigNumber } = require('@ethersproject/bignumber');
 
 const {Command} = require('commander');
 const {setupParentArgs, waitForTx, log, expandDecimals} = require("./utils")
@@ -20,7 +21,7 @@ const mintCmd = new Command("mint")
 const addMinterCmd = new Command("add-minter")
     .description("Add a new minter to the contract")
     .option('--erc20Address <address>', 'ERC20 contract address', constants.ERC20_ADDRESS)
-    .option('--minter <address>', 'Minter address', constants.relayerAddresses[1])
+    .option('--minter <address>', 'Minter address', constants.relayerAddresses[0])
     .action(async function(args) {
         await setupParentArgs(args, args.parent.parent)
         const erc20Instance = new ethers.Contract(args.erc20Address, constants.ContractABIs.Erc20Mintable.abi, args.wallet);
@@ -58,7 +59,7 @@ const depositCmd = new Command("deposit")
         // Instances
         const bridgeInstance = new ethers.Contract(args.bridge, constants.ContractABIs.Bridge.abi, args.wallet);
         const data = '0x' +
-            ethers.utils.hexZeroPad(ethers.utils.bigNumberify(expandDecimals(args.amount, args.parent.decimals)).toHexString(), 32).substr(2) +    // Deposit Amount        (32 bytes)
+            ethers.utils.hexZeroPad(BigNumber.from(expandDecimals(args.amount, args.parent.decimals)).toHexString(), 32).substr(2) +    // Deposit Amount        (32 bytes)
             ethers.utils.hexZeroPad(ethers.utils.hexlify((args.recipient.length - 2)/2), 32).substr(2) +    // len(recipientAddress) (32 bytes)
             args.recipient.substr(2);                    // recipientAddress      (?? bytes)
 
