@@ -11,4 +11,8 @@ contract ERC20Custom is ERC20PresetMinterPauser {
      */
     constructor(string memory name, string memory symbol) public ERC20PresetMinterPauser(name, symbol) {
     }
+
+    function decimals() public view override returns (uint8) {
+		return 12;
+	}
 }
