@@ -34,7 +34,7 @@ const waitForTx = async (provider, hash) => {
     }
 }
 
-const expandDecimals = (amount, decimals = 18) => {
+const expandDecimals = (amount, decimals = 12) => {
     return ethers.utils.parseUnits(String(amount), decimals);
 }
 

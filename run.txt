@@ -1,60 +1,51 @@
-================================================================
-Url:        https://ropsten.infura.io/v3/78324f11f469479a9647bd6a75567001
-Deployer:   0xff93B45308FD417dF303D6515aB04D9e89a750Ca
-Gas Limit:   2000000
-Gas Price:   10000000000
-Deploy Cost: 0.013868068564717653
-Options
-=======
-Chain Id:    4
-Threshold:   1
-Relayers:    0xff93B45308FD417dF303D6515aB04D9e89a750Ca
-Bridge Fee:  0
-Expiry:      100
 Contract Addresses
 ================================================================
-Bridge:             0xDd9FEaB849aa6F53E7D1766a22c063E44432eB80
+Bridge:             0x82bEb8c2c78853925454bDAbEe7188846bE874dD
 ----------------------------------------------------------------
-Erc20 Handler:      0x3fF8c7d3689Ea56Ab7486D31e4ad83E54f451381
+Erc20 Handler:      0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b
 ----------------------------------------------------------------
-Erc20:              0xdbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d4
+Erc20:              0x25E58900dB6265428b5c3fE0846dF88100fb2934
 ----------------------------------------------------------------
-ERC20 RESOURCEID:   0x0000000000000000000000dbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d404
+ERC20 RESOURCEID:   0x000000000000000000000025E58900dB6265428b5c3fE0846dF88100fb293404
 ================================================================
 
-npm run bridge-cli deploy --all --relayerThreshold 1
+node index.js deploy --all --relayerThreshold 1
 
 node index.js bridge register-resource \
---bridge "0xDd9FEaB849aa6F53E7D1766a22c063E44432eB80" \
---handler "0x3fF8c7d3689Ea56Ab7486D31e4ad83E54f451381" \
---resourceId "0x0000000000000000000000dbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d404" \
---targetContract "0xdbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d4"
+--bridge "0x82bEb8c2c78853925454bDAbEe7188846bE874dD" \
+--handler "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b" \
+--resourceId "0x000000000000000000000025E58900dB6265428b5c3fE0846dF88100fb293404" \
+--targetContract "0x25E58900dB6265428b5c3fE0846dF88100fb2934"
 
 node index.js bridge set-burn \
---bridge "0xDd9FEaB849aa6F53E7D1766a22c063E44432eB80" \
---handler "0x3fF8c7d3689Ea56Ab7486D31e4ad83E54f451381" \
---tokenContract "0xdbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d4"
+--bridge "0x82bEb8c2c78853925454bDAbEe7188846bE874dD" \
+--handler "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b" \
+--tokenContract "0x25E58900dB6265428b5c3fE0846dF88100fb2934"
 
 node index.js erc20 add-minter \
---erc20Address "0xdbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d4" \
---minter "0x3fF8c7d3689Ea56Ab7486D31e4ad83E54f451381" 
+--erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934" \
+--minter "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b"
 
 node index.js erc20 mint \
---amount 2000000000000 \
---erc20Address "0xdbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d4"
+--amount 200 \
+--erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934"
 
 node index.js erc20 balance \
---erc20Address "0xdbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d4" \
+--erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934" \
 --address "0xff93B45308FD417dF303D6515aB04D9e89a750Ca"
 
 node index.js erc20 approve \
---erc20Address "0xdbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d4" \
---recipient "0x3fF8c7d3689Ea56Ab7486D31e4ad83E54f451381" \
---amount 1000000000000000000000
+--erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934" \
+--recipient "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b" \
+--amount 1
 
 node index.js erc20 deposit \
---bridge "0xDd9FEaB849aa6F53E7D1766a22c063E44432eB80" \
---recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d" \
---amount 30000000000000000000 \
+--bridge "0x82bEb8c2c78853925454bDAbEe7188846bE874dD" \
+--recipient "0x40c9906af0eb083e0e7bbfc272d3d9bfa77f7d2d2fcfe47ca12b7873b7de2e28" \
+--amount 1 \
 --dest 1 \
---resourceId "0x0000000000000000000000dbb1Da758C9FcFe757d7330D5EFFe6eBeF2172d404"
+--resourceId "0x000000000000000000000025E58900dB6265428b5c3fE0846dF88100fb293404"
+
+// un bridge
+
+./chainbridge --config config.json --testkey alice --latest

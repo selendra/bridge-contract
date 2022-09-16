@@ -24,7 +24,8 @@ module.exports.relayerAddresses = [
 module.exports.relayerPrivKeys = [
     "000000000000000000000000000000000000000000000000000000616c696365", // Alice Private Key
 ]
- 
+
+module.exports.DECIMAL = 12;
  
 // These are deterministic
 module.exports.BRIDGE_ADDRESS = "0x62877dDCd49aD22f5eDfc6ac108e9a4b5D2bD88B";

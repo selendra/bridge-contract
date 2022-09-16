@@ -481,8 +481,8 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "18.7.18"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.18.tgz#633184f55c322e4fb08612307c274ee6d5ed3154"
+  version "constants.DECIMAL.7.constants.DECIMAL"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-constants.DECIMAL.7.constants.DECIMAL.tgz#633184f55c322e4fb08612307c274ee6d5ed3154"
   integrity sha512-m+6nTEOadJZuTPkKR/SYK3A2d7FZrgElol9UP1Kae90VVU4a6mxnPuLiIW1m4Cq4gZ/nWb9GrdVXJCoCazDAbg==
 
 aes-js@3.0.0:
