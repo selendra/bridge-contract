@@ -1,50 +1,54 @@
 Contract Addresses
 ================================================================
-Bridge:             0x82bEb8c2c78853925454bDAbEe7188846bE874dD
+Bridge:             0x7cd7005DA3ea21E5BB03A4E695c191F6E041FdA4
 ----------------------------------------------------------------
-Erc20 Handler:      0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b
+Erc20 Handler:      0x667459FAF38d3d7015D1e039C88bb81406EBF5a9
 ----------------------------------------------------------------
-Erc20:              0x25E58900dB6265428b5c3fE0846dF88100fb2934
+Erc20:              0xa804a7a42b80E52289B9FEa7101a5ad7968bF6aF
 ----------------------------------------------------------------
-ERC20 RESOURCEID:   0x000000000000000000000025E58900dB6265428b5c3fE0846dF88100fb293404
+ERC20 RESOURCEID:   0x000000000000000000000000000000c84da63790f906342aa09d258680fc3b01
 ================================================================
+
+0x000000000000000000000000000000c84da63790f906342aa09d258680fc3b01
+0x4272696467655472616E736665722E7472616E73666572 (BridgeTransfer.transfer)
 
 node index.js deploy --all --relayerThreshold 1
 
 node index.js bridge register-resource \
---bridge "0x82bEb8c2c78853925454bDAbEe7188846bE874dD" \
---handler "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b" \
---resourceId "0x000000000000000000000025E58900dB6265428b5c3fE0846dF88100fb293404" \
---targetContract "0x25E58900dB6265428b5c3fE0846dF88100fb2934"
+--bridge "0x7cd7005DA3ea21E5BB03A4E695c191F6E041FdA4" \
+--handler "0x667459FAF38d3d7015D1e039C88bb81406EBF5a9" \
+--resourceId "0x000000000000000000000000000000c84da63790f906342aa09d258680fc3b01" \
+--targetContract "0xa804a7a42b80E52289B9FEa7101a5ad7968bF6aF"
 
 node index.js bridge set-burn \
---bridge "0x82bEb8c2c78853925454bDAbEe7188846bE874dD" \
---handler "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b" \
---tokenContract "0x25E58900dB6265428b5c3fE0846dF88100fb2934"
+--bridge "0x7cd7005DA3ea21E5BB03A4E695c191F6E041FdA4" \
+--handler "0x667459FAF38d3d7015D1e039C88bb81406EBF5a9" \
+--tokenContract "0xa804a7a42b80E52289B9FEa7101a5ad7968bF6aF"
 
 node index.js erc20 add-minter \
---erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934" \
---minter "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b"
+--erc20Address "0xa804a7a42b80E52289B9FEa7101a5ad7968bF6aF" \
+--minter "0x667459FAF38d3d7015D1e039C88bb81406EBF5a9"
 
 node index.js erc20 mint \
 --amount 200 \
---erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934"
+--erc20Address "0xa804a7a42b80E52289B9FEa7101a5ad7968bF6aF"
 
 node index.js erc20 balance \
---erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934" \
+--erc20Address "0xa804a7a42b80E52289B9FEa7101a5ad7968bF6aF" \
 --address "0xff93B45308FD417dF303D6515aB04D9e89a750Ca"
 
 node index.js erc20 approve \
---erc20Address "0x25E58900dB6265428b5c3fE0846dF88100fb2934" \
---recipient "0xcdcE5808517E8f7Ccc1623cD2fA77a4D73D75F5b" \
+--erc20Address "0xa804a7a42b80E52289B9FEa7101a5ad7968bF6aF" \
+--recipient "0x667459FAF38d3d7015D1e039C88bb81406EBF5a9" \
 --amount 1
 
 node index.js erc20 deposit \
---bridge "0x82bEb8c2c78853925454bDAbEe7188846bE874dD" \
+--bridge "0x7cd7005DA3ea21E5BB03A4E695c191F6E041FdA4" \
 --recipient "0x40c9906af0eb083e0e7bbfc272d3d9bfa77f7d2d2fcfe47ca12b7873b7de2e28" \
 --amount 1 \
 --dest 1 \
---resourceId "0x000000000000000000000025E58900dB6265428b5c3fE0846dF88100fb293404"
+--resourceId "0x000000000000000000000000000000c84da63790f906342aa09d258680fc3b01"
+
 
 // un bridge
 
