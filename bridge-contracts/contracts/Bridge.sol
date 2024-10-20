@@ -16,7 +16,7 @@ import "./interfaces/IAccessControlSegregator.sol";
     @title Facilitates deposits and creation of deposit proposals, and deposit executions.
     @author ChainSafe Systems.
  */
-contract Bridge is Pausable, Context, EIP712 {
+contract Bridge is PausableBridge, Context, EIP712 {
     using ECDSA for bytes32;
 
     bytes32 private constant _PROPOSALS_TYPEHASH =
