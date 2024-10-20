@@ -1,0 +1,66 @@
+{
+  "contractName": "Bridge",
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "adminChangeAccessControl(address)": {
+        "notice": "Changes access control contract address.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "adminChangeFeeHandler(address)": {
+        "notice": "Changes deposit fee handler contract address.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "adminPauseTransfers()": {
+        "notice": "Pauses deposits, proposal creation and voting, and deposit executions.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "adminSetBurnable(address,address)": {
+        "notice": "Sets a resource as burnable for handler contracts that use the IERCHandler interface.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "adminSetDepositNonce(uint8,uint64)": {
+        "notice": "Sets the nonce for the specific domainID.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "adminSetForwarder(address,bool)": {
+        "notice": "Set a forwarder to be used.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "adminSetResource(address,bytes32,address,bytes)": {
+        "notice": "Sets a new resource for handler contracts that use the IERCHandler interface, and maps the {handlerAddress} to {resourceID} in {_resourceIDToHandlerAddress}.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "adminUnpauseTransfers()": {
+        "notice": "Unpauses deposits, proposal creation and voting, and deposit executions.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract.MPC address has to be set before Bridge can be unpaused"
+      },
+      "adminWithdraw(address,bytes)": {
+        "notice": "Used to manually withdraw funds from ERC safes.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "constructor": {
+        "notice": "Initializes Bridge, creates and grants {_msgSender()} the admin role, sets access control contract for bridge and sets the inital state of the Bridge to paused."
+      },
+      "deposit(uint8,bytes32,bytes,bytes)": {
+        "notice": "Initiates a transfer using a specified handler contract.Only callable when Bridge is not paused.Emits {Deposit} event with all necessary parameters and a handler response."
+      },
+      "endKeygen(address)": {
+        "notice": "This method can be called only once, after the MPC address is set Bridge is unpaused. It's used to trigger the belonging process on the MPC side which also handles keygen function calls order.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "executeProposal((uint8,uint64,bytes32,bytes),bytes)": {
+        "notice": "Executes a deposit proposal using a specified handler contract (only if signature is signed by MPC).Failed executeProposal from handler don't revert, emits {FailedHandlerExecution} event.Emits {ProposalExecution} event.For ERC handlers, when execution fails, the handler will terminate the function with revert."
+      },
+      "executeProposals((uint8,uint64,bytes32,bytes)[],bytes)": {
+        "notice": "Executes a batch of deposit proposals using a specified handler contract for each proposal (only if signature is signed by MPC).If executeProposals fails it doesn't revert, emits {FailedHandlerExecution} event.Emits {ProposalExecution} event for each proposal in the batch.For ERC handlers, when execution fails, the handler will terminate the function with revert."
+      },
+      "isProposalExecuted(uint8,uint256)": {
+        "notice": "Returns a boolean value."
+      },
+      "refreshKey(string)": {
+        "notice": "It's used to trigger the belonging process on the MPC side. It's used to trigger the belonging process on the MPC side which also handles keygen function calls order.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "retry(string)": {
+        "notice": "This method is used to trigger the process for retrying failed deposits on the MPC side.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "startKeygen()": {
+        "notice": "Once MPC address is set, this method can't be invoked anymore. It's used to trigger the belonging process on the MPC side which also handles keygen function calls order.Only callable by address that has the right to call the specific function, which is mapped in {functionAccess} in AccessControlSegregator contract."
+      },
+      "verify((uint8,uint64,bytes32,bytes)[],bytes)": {
+        "notice": "Verifies that proposal data is signed by MPC address."
+      }
+    },
+    "version": 1
+  }
+}

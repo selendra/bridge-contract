@@ -1,11 +1,10 @@
 import fs from "fs";
-import hre from "hardhat";
 import { ethers } from "ethers";
+import hre from "hardhat";
 import { resolve } from "path";
 
-
 const BRIDGE_CONTRACT_PATH = resolve(__dirname, "../../contracts/Bridge.sol");
-const ARTIFACTS_PATH = resolve(__dirname, "./Bridge.json");
+const ARTIFACTS_PATH = resolve(__dirname, "./bridge_methods.json");
 
 export const generateAccessControlFuncSignatures = () => {
     const bridgeAbiJson = JSON.parse(fs.readFileSync(ARTIFACTS_PATH, 'utf-8'));
@@ -44,3 +43,21 @@ export const generateAccessControlFuncSignatures = () => {
 }
 
 export const accessControlFuncSignatures = generateAccessControlFuncSignatures().map(str => ethers.toUtf8Bytes(str));
+
+
+enum DomainId {
+  local = 0,
+  selendra = 1,
+  selendraTestnet = 10
+}
+
+export const getDomainId = async () =>{
+  const network = await hre.ethers.provider.getNetwork()
+  if(network.name == "selendra"){
+    return DomainId.selendra
+  }else if(network.name == "selendraTestnet"){
+    return DomainId.selendraTestnet
+  }else {
+    return DomainId.local
+  }
+}
