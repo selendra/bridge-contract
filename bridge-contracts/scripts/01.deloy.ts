@@ -72,7 +72,7 @@ async function main() {
   );
   const percentageFeeHandlerAddr = await percentageFeeHandlerInstance.getAddress()
 
-  const bridge = await hre.ethers.getContractAt("Bridge", "0x2d0a31E66Ebf29cd28d4A3317dA5609b27c9a606");
+  const bridge = await hre.ethers.getContractAt("Bridge", bridgeAddr);
   await bridge.adminChangeFeeHandler(feeRouterAddr, {gasLimit: 2000000});
 
   const defaultMessageReceiver = await hre.ethers.getContractAt("DefaultMessageReceiver", defaultMessageReceiverAddr);
