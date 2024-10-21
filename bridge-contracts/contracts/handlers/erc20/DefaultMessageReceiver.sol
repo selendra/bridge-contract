@@ -5,8 +5,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
-import "../utils/AccessControl.sol";
-import "../interfaces/ISygmaMessageReceiver.sol";
+import "../../utils/AccessControl.sol";
+import "../../interfaces/ISygmaMessageReceiver.sol";
 
 /**
     @title Optinal Message Call made as part of other handlers proposal execution.

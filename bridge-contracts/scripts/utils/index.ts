@@ -6,6 +6,14 @@ import { resolve } from "path";
 const BRIDGE_CONTRACT_PATH = resolve(__dirname, "../../contracts/Bridge.sol");
 const ARTIFACTS_PATH = resolve(__dirname, "./bridge_methods.json");
 
+const toHex = (covertThis: string, padding: number) => {
+  return ethers.zeroPadValue(ethers.hexlify(covertThis), padding);
+};
+
+export const createResourceID = (contractAddress: string, domainID: number) => {
+  return toHex(contractAddress + toHex(ethers.toBeHex(domainID), 1).substr(2), 32);
+};
+
 export const generateAccessControlFuncSignatures = () => {
     const bridgeAbiJson = JSON.parse(fs.readFileSync(ARTIFACTS_PATH, 'utf-8'));
     const bridgeContract = fs.readFileSync(BRIDGE_CONTRACT_PATH, 'utf-8');
@@ -33,17 +41,11 @@ export const generateAccessControlFuncSignatures = () => {
           hash: ethers.keccak256(Buffer.from(func)).substring(0,10)
     })
   );
-
   // console.table(accessControlFuncSignatures);
-
-  accessControlFuncSignatures = accessControlFuncSignatures.map(e => e.hash)
-
-  return accessControlFuncSignatures
- 
+  return accessControlFuncSignatures.map(e => e.hash)
 }
 
 export const accessControlFuncSignatures = generateAccessControlFuncSignatures().map(str => ethers.toUtf8Bytes(str));
-
 
 enum DomainId {
   local = 0,
@@ -51,7 +53,7 @@ enum DomainId {
   selendraTestnet = 10
 }
 
-export const getDomainId = async () =>{
+export const getDomainId = async (): Promise<number> =>{
   const network = await hre.ethers.provider.getNetwork()
   if(network.name == "selendra"){
     return DomainId.selendra
@@ -60,4 +62,14 @@ export const getDomainId = async () =>{
   }else {
     return DomainId.local
   }
+}
+
+export interface erc20Interface {
+  address?: string;
+  name: string;
+  symbol: string;
+  decimals: number;
+  strategy: string;
+  resourceID: string;
+  feeType?: string;
 }
